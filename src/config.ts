@@ -30,7 +30,6 @@ const getConfig = (): ENV => {
         TOKEN_REFRESH_EXP: proccess.env.JWT_REFRESH_SECRET ? Number(proccess.env.JWT_REFRESH_SECRET) : undefined,
         TOKEN_ACCESS_EXP: proccess.env.TOKEN_ACCESS_EXP ? Number(proccess.env.TOKEN_ACCESS_EXP) : undefined,
         SERVER_PORT: proccess.env.SERVER_PORT ? Number(proccess.env.SERVER_PORT) : undefined,
-        NODE_ENV: process.env.NODE_ENV,
     }
 }
 
