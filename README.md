@@ -1,7 +1,13 @@
-# Awesome Project Build with TypeORM
+# Тестовое задание
+# Сервис для работы с пользователями
 
-Steps to run this project:
+## Шаги:
+- Задать секретные ключи для JWT в файле `.env`
+- Задать параметры БД в файле `./src/data-source.ts`
+- Выполнить установку зависимостей `npm i`
+- Запустить командой `npm start`
 
-1. Run `npm i` command
-2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command
+## Важно
+Полученные токены передаются серверу в заголовках HTTP
+- `X-Restore-Token` для refresh_token
+- `X-Auth-Token` для access_token
