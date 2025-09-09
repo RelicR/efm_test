@@ -2,6 +2,9 @@
 
 ## Шаги:
 - Задать секретные ключи для JWT в файле `.env`
+- Создать БД PostgreSQL
+- Установить расширение в БД `uuid-ossp`
+  - `CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`
 - Задать параметры БД в файле `./src/data-source.ts`
 - Выполнить установку зависимостей `npm i`
 - Запустить командой `npm run start`
