@@ -1,5 +1,5 @@
-import * as express from "express"
-import * as bodyParser from "body-parser"
+import express = require("express")
+import bodyParser = require("body-parser")
 import { Request, Response } from "express"
 import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"

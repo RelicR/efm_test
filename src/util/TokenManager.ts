@@ -6,12 +6,14 @@ import { IUser } from "../model/User";
 export class TokenManager {
     // private static readonly refreshExpIn: number = 1296000000 / 1000
     // private static readonly accessExpIn: number = 1800000 / 1000
-    private static readonly refreshExpIn: number = config.TOKEN_REFRESH_EXP / 1000
-    private static readonly accessExpIn: number = config.TOKEN_ACCESS_EXP / 1000
+    private static readonly refreshExpIn: number = config.TOKEN_REFRESH_EXP
+    private static readonly accessExpIn: number = config.TOKEN_ACCESS_EXP
     private static readonly refreshSecret: string = config.JWT_REFRESH_SECRET
     private static readonly accessSecret: string = config.JWT_ACCESS_SECRET
 
     static genRefresh(user: IUser, fingerprint: string): IToken {
+        console.log(this.refreshExpIn)
+        console.log(this.accessExpIn)
         const payload: ITokenPayload = {
             user: user.id,
             aud: [],

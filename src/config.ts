@@ -1,9 +1,9 @@
-import path from "path"
-import dotenv from "dotenv"
+import path = require("path")
 
-// dotenv.config({ path: path.resolve(__dirname, "../.env") })
-dotenv.config({ path: path.resolve(__dirname, "../dev.env") })
+// require('dotenv').config({ path: path.resolve(__dirname, "../dev.env") })
+require('dotenv').config({ path: path.resolve(__dirname, "../.env") })
 
+console.log(path.resolve(__dirname, "../dev.env"))
 interface ENV {
     NODE_ENV: string | undefined
     JWT_REFRESH_SECRET: string | undefined
@@ -12,6 +12,8 @@ interface ENV {
     TOKEN_ACCESS_EXP: number | undefined
     SERVER_PORT: number | undefined
 }
+
+console.log(Number(1296000))
 
 interface Config {
     NODE_ENV: string
@@ -25,11 +27,11 @@ interface Config {
 const getConfig = (): ENV => {
     return {
         NODE_ENV: process.env.NODE_ENV,
-        JWT_REFRESH_SECRET: proccess.env.JWT_REFRESH_SECRET,
-        JWT_ACCESS_SECRET: proccess.env.JWT_ACCESS_SECRET,
-        TOKEN_REFRESH_EXP: proccess.env.JWT_REFRESH_SECRET ? Number(proccess.env.JWT_REFRESH_SECRET) : undefined,
-        TOKEN_ACCESS_EXP: proccess.env.TOKEN_ACCESS_EXP ? Number(proccess.env.TOKEN_ACCESS_EXP) : undefined,
-        SERVER_PORT: proccess.env.SERVER_PORT ? Number(proccess.env.SERVER_PORT) : undefined,
+        JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
+        JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET,
+        TOKEN_REFRESH_EXP: process.env.TOKEN_REFRESH_EXP ? Number(process.env.TOKEN_REFRESH_EXP) : undefined,
+        TOKEN_ACCESS_EXP: process.env.TOKEN_ACCESS_EXP ? Number(process.env.TOKEN_ACCESS_EXP) : undefined,
+        SERVER_PORT: process.env.SERVER_PORT ? Number(process.env.SERVER_PORT) : undefined,
     }
 }
 
@@ -47,3 +49,5 @@ const config = getConfig()
 const sanitizedConfig = getSanitzedConfig(config)
 
 export default sanitizedConfig
+
+console.log(sanitizedConfig)
