@@ -13,8 +13,6 @@ export class UserRepository {
     }
 
     static async findOne(id?: string, email?: string): Promise<User> {
-        console.log(id, !!id)
-        console.log(email, !!email)
         return !!id
             ? this.userRepository.findOne({ where: { id: id } })
             : !!email

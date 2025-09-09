@@ -14,7 +14,6 @@ export class UserService {
     static async create(userData: IUser): Promise<Result<User>> {
         const user = Object.assign(new User(), userData)
         const validationErrors = await validate(user)
-        console.log(validationErrors)
 
         if (validationErrors.length > 0) {
             return {
@@ -42,7 +41,7 @@ export class UserService {
     }
 
     static async authenticate(authData: Partial<User>): Promise<Result<User>> {
-        console.log(authData)
+
         if (!authData.email || !authData.password) {
             return {
                 error: true,
@@ -52,7 +51,7 @@ export class UserService {
         }
 
         const user = await UserRepository.findOne(authData.id, authData.email)
-        console.log(user)
+
         if (!user) {
             return {
                 error: true,
@@ -68,7 +67,6 @@ export class UserService {
                     result: null
                 }
             }
-            console.log("User logged in")
             return {
                 error: false,
                 message: SuccessStatus.USER_LOGGED_IN,
@@ -76,7 +74,6 @@ export class UserService {
             }
         }
 
-        console.log("User not authenticated")
         return {
             error: true,
             message: ExceptionType.ERR_INVALID_CREDENTIAL,

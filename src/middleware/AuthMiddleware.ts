@@ -4,12 +4,8 @@ import { TokenService } from "../service/TokenService"
 import { ExceptionType } from "../model/Result";
 
 export async function assignUserData(req: Request, res: Response, next: NextFunction) {
-    // const refToken = req.body.refresh_token
-    // const accToken = req.body.access_token
     const refToken = req.headers["x-restore-token"] as string
     const accToken = req.headers["x-auth-token"] as string
-
-    console.log(req.headers)
 
     res.locals.refToken = refToken
     res.locals.accToken = accToken
@@ -22,7 +18,6 @@ export async function assignUserData(req: Request, res: Response, next: NextFunc
     }
 
     const accTokenClaims = TokenManager.getAccClaims(accToken)
-    console.log(accTokenClaims)
     res.locals.user = accTokenClaims.user
     res.locals.role = accTokenClaims.role
 
@@ -31,9 +26,6 @@ export async function assignUserData(req: Request, res: Response, next: NextFunc
 
 export function authorize(...allowedRoles: string[]) {
     return (req: Request, res: Response, next: NextFunction)=> {
-        console.log("AUTHORIZE")
-        console.log(res.locals)
-        console.log(req.path, allowedRoles)
         if (!res.locals.user) {
             return res.status(401).json({ error: ExceptionType.ERR_UNAUTHORIZED });
         }
@@ -42,10 +34,4 @@ export function authorize(...allowedRoles: string[]) {
         }
         next()
     }
-}
-
-export function roleAccess(req: Request, res: Response, next: NextFunction) {
-    console.log(req.path)
-    console.log(res.locals)
-    next()
 }

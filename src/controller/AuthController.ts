@@ -4,8 +4,6 @@ import { UserService } from "../service/UserService"
 import moment = require("moment")
 
 export class AuthController {
-
-    // #swagger.summary = 'Some summary...'
     async signup(request: Request, response: Response, next: NextFunction) {
         const birthdayDate = moment(request.body.birthday, 'DD.MM.YYYY').toDate()
         const user = await UserService.create({...request.body, birthday: birthdayDate})
@@ -25,20 +23,19 @@ export class AuthController {
         return tokens
     }
 
-    // #swagger.summary = 'Some summary...'
     async login(request: Request, response: Response, next: NextFunction) {
         const {email, password} = request.body
         const fingerprint = request.get("User-Agent")
 
         const user = await UserService.authenticate({email, password})
-        console.log(user)
+
         if (user.error) {
             response.status(400)
             return user
         }
-        // console.log(response.locals.agent)
+
         const tokens = await TokenService.update(user.result, fingerprint)
-        console.log(tokens)
+
         if (tokens.error) {
             response.status(400)
             return tokens

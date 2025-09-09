@@ -7,7 +7,6 @@ export class TokenRepository {
 
     static async update(tokenData: IToken): Promise<Token> {
         const token = Object.assign(new Token(), tokenData)
-        console.log(token)
         return await this.tokenRepository.save(token)
     }
 

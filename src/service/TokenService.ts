@@ -62,11 +62,7 @@ export class TokenService {
         const refClaims = TokenManager.getRefClaims(refToken)
         const accClaims = TokenManager.getAccClaims(accToken)
 
-        console.log(refClaims)
-        console.log(accClaims)
-
         if (!refClaims || !accClaims || refClaims?.user != accClaims?.user) {
-            console.log("WRONG TOKEN")
             return {
                 error: true,
                 message: ExceptionType.ERR_INVALID_TOKEN,
@@ -79,8 +75,7 @@ export class TokenService {
             return {...user, result: false}
         }
         const token = await TokenRepository.findOne(refClaims.user)
-        console.log(refToken)
-        console.log(token.token)
+
         if (token.token != refToken) {
             return {
                 error: true,
@@ -89,8 +84,6 @@ export class TokenService {
             }
         }
 
-        console.log(fingerprint)
-        console.log(refClaims.fp)
         if (refClaims.fp != fingerprint) {
             return {
                 error: true,
@@ -98,7 +91,7 @@ export class TokenService {
                 result: false
             }
         }
-        console.log(user.result)
+
         if (refClaims.ver != user.result.version) {
             return {
                 error: true,

@@ -3,7 +3,6 @@ import path = require("path")
 // require('dotenv').config({ path: path.resolve(__dirname, "../dev.env") })
 require('dotenv').config({ path: path.resolve(__dirname, "../.env") })
 
-console.log(path.resolve(__dirname, "../dev.env"))
 interface ENV {
     NODE_ENV: string | undefined
     JWT_REFRESH_SECRET: string | undefined
@@ -12,8 +11,6 @@ interface ENV {
     TOKEN_ACCESS_EXP: number | undefined
     SERVER_PORT: number | undefined
 }
-
-console.log(Number(1296000))
 
 interface Config {
     NODE_ENV: string
@@ -49,5 +46,3 @@ const config = getConfig()
 const sanitizedConfig = getSanitzedConfig(config)
 
 export default sanitizedConfig
-
-console.log(sanitizedConfig)

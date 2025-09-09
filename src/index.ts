@@ -13,7 +13,14 @@ AppDataSource.initialize().then(async () => {
         (app as any)[route.method](route.route, ...route.middleware, (req: Request, res: Response, next: Function) => {
             const result = (new (route.controller as any))[route.action](req, res, next)
             if (result instanceof Promise) {
-                result.then(result => result !== null && result !== undefined ? res.send(result) : undefined)
+                console.log(`\n${req.method} | ${req.path}\nUser: ${res.locals.user}\nRole: ${res.locals.role}`)
+                result.then((result) => {
+                    console.log(
+                        `RESPONSE\nError: ${result.error}\nMessage: ${result.message}\nResult: `,
+                        result.result,
+                        '\n')
+                    result !== null && result !== undefined ? res.send(result) : undefined
+                })
 
             } else if (result !== null && result !== undefined) {
                 res.json(result)

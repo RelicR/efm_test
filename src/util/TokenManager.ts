@@ -12,8 +12,6 @@ export class TokenManager {
     private static readonly accessSecret: string = config.JWT_ACCESS_SECRET
 
     static genRefresh(user: IUser, fingerprint: string): IToken {
-        console.log(this.refreshExpIn)
-        console.log(this.accessExpIn)
         const payload: ITokenPayload = {
             user: user.id,
             aud: [],
@@ -53,10 +51,8 @@ export class TokenManager {
         let payload: ITokenPayload | null
         jwt.verify(token, this.refreshSecret, (err, decoded) => {
             payload = err ? null : (decoded as ITokenPayload)
-            console.log(err)
+            if (err) console.log(err)
         })
-        console.log('PAYLOAD')
-        console.log(payload)
         return payload
     }
 
@@ -64,7 +60,7 @@ export class TokenManager {
         let payload: ITokenPayload | null
         jwt.verify(token, this.accessSecret, (err, decoded) => {
             payload = err ? null : (decoded as ITokenPayload)
-            console.log(err)
+            if (err) console.log(err)
         })
         return payload
     }
