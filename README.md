@@ -38,6 +38,7 @@
     "password": "пароль",
     "first_name": "Имя",
     "last_name": "Фамилия",
+    "middle_name": "Отчество",
     "birthday": "ДД.ММ.ГГГГ",
     "role": "Admin"
 }
