@@ -1,24 +1,22 @@
 # Тестовое задание Сервис для работы с пользователями
 
 ## Шаги:
-- Задать секретные ключи для JWT в файле `.env`
-- Создать БД PostgreSQL
-- Установить расширение в БД `uuid-ossp`
-  - `CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`
-- Задать параметры БД в файле `./src/data-source.ts`
-- Выполнить установку зависимостей `npm i`
-- Запустить командой `npm run start`
-
+- Клонировать проект в удобное место
+- Задать секреты для JWT в файле `.env`, при необходимости изменить другие переменные
+- В терминале Docker перейти в корневую директорию проекта `efm_test`
+- Запустить `wsl`
+- Выполнить команду `docker-compose -f docker-compose.yml up -d`
+- Отправлять запросы на `http://localhost:3000`
 ## Эндпоинты
-```
-POST /api/auth/register     | Регистрация                          |
-POST /api/auth/login        | Вход                                 |
-GET  /api/users             | Список аккаунтов пользователей       | Admin      | 
-GET  /api/users/me          | Информация о своём аккаунте          | Admin/User | 
-GET  /api/users/:id         | Информация об аккауенте пользователе | Admin      | 
-POST /api/users/block/me    | Заблокировать свой аккаунт           | Admin/User | 
-POST /api/users/block/:id   | Заблокировать аккаунт пользователя   | Admin      |
-```
+| Метод | Роль | Путь |  Описание    |
+|-------|-----|-----|-------|
+| POST| - |http://localhost:3000/api/auth/register|Регистрация|
+| POST| - |http://localhost:3000/api/auth/login | Вход |
+| GET | Admin | http://localhost:3000/api/users | Список аккаунтов пользователей |
+| GET | Admin | http://localhost:3000/api/users/:id | Информация об аккауенте пользователе |
+| GET | Admin/User | http://localhost:3000/api/users/me | Информация о своём аккаунте |
+| POST | Admin | http://localhost:3000/api/users/block/:id | Заблокировать аккаунт пользователя |
+| POST | Admin/User | http://localhost:3000/api/users/block/me | Заблокировать свой аккаунт |
 
 ## Важно
 - Поля пользователя:
