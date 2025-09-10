@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: efm-test-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: tunitefm
+      POSTGRES_PASSWORD: 123qwe
+      POSTGRES_DB: tunit
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tunitefm -d tunit"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: efm-test-userapi
+    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: tunitefm
+      DB_PASSWORD: 123qwe
+      DB_NAME: tunit
+    ports:
+      - "3000:3000"
+#    networks:
+#      - app-network
+
+volumes:
+  postgres_data:
+
+#networks:
+#  app-network:
+#    driver: bridge
